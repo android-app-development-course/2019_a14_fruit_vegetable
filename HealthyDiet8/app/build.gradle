@@ -42,4 +42,5 @@ dependencies {
     testImplementation 'org.json:json:20140107'
     implementation 'com.kongzue.dialog_v3x:dialog:3.1.6'
     implementation 'com.github.XunMengWinter:CircularAnim:0.4.6'
+    implementation 'androidx.palette:palette:1.0.0'
 }

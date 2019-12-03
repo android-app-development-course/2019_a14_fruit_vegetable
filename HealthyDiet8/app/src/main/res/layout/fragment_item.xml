@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/cp_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                android:layout_marginStart="16dp"
+                android:text="菜品名"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.108"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/zuofa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="做法"
+                android:maxEms="14"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tips"
+                app:layout_constraintTop_toBottomOf="@+id/tips" />
+
+            <TextView
+                android:id="@+id/yuanliao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="原料"
+                android:maxEms="14"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/cp_name"
+                app:layout_constraintTop_toBottomOf="@+id/cp_name" />
+
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="提示"
+                android:maxEms="14"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tiaoliao"
+                app:layout_constraintTop_toBottomOf="@+id/tiaoliao" />
+
+            <TextView
+                android:id="@+id/tiaoliao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="调料"
+                android:maxEms="14"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/yuanliao"
+                app:layout_constraintTop_toBottomOf="@+id/yuanliao" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

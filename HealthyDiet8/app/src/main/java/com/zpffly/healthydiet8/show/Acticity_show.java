@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.zpffly.healthydiet8.NETConnect.GetDietThread;
+import com.zpffly.healthydiet8.NETConnect.GetImgThread;
 import com.zpffly.healthydiet8.R;
 
 import org.json.JSONArray;
@@ -42,6 +46,13 @@ public class Acticity_show extends AppCompatActivity {
     static int iconflag=0;
     private Uri photoOutputUri;
 
+//    private Handler caipuHandle = new Handler(){
+//        @Override
+//        public void handleMessage(@NonNull Message msg) {
+//            caipu = msg.getData().getString("diet");
+//        }
+//    };
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
@@ -50,50 +61,61 @@ public class Acticity_show extends AppCompatActivity {
 
         Intent thisintent=getIntent();
         title=thisintent.getStringExtra("title");
-        caipu=thisintent.getStringExtra("caipu");
+        caipu = thisintent.getStringExtra("caipu");
+//        try {
+//            // 解析识别json得到菜名
+//            JSONObject jsonobj=new JSONObject(title);
+//            JSONArray jsonarry=jsonobj.optJSONArray("result");
+//            String resName = jsonarry.optJSONObject(0).optString("name");
+//            GetDietThread thread = new GetDietThread(resName, caipuHandle);
+//            thread.start();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        caipu=thisintent.getStringExtra("caipu");
         photoOutputUri=Uri.parse(thisintent.getStringExtra("url"));
 
         imageView.setImageURI(photoOutputUri);
 
-        caipu="{\n" +
-                "\"code\":200,\n" +
-                "\"msg\":\"success\",\n" +
-                "\"newslist\":[\n" +
-                "{\n" +
-                "\"id\":4836,\n" +
-                "\"type_id\":439,\n" +
-                "\"type_name\":\"凉菜类\",\n" +
-                "\"cp_name\":\"蓑衣黄瓜\",\n" +
-                "\"zuofa\":\"1.将黄瓜洗净，切成蓑衣花刀，用盐腌10分钟，再用清水冲洗后沥干水分装盘；2.将香菇、胡萝卜、冬笋、葱、姜洗净切丝；3.锅内放油，油烧至六成热时放入葱丝、姜丝，炒出香味后再倒入香菇丝、胡萝卜丝、冬笋丝翻炒，加入白糖、醋、精盐、味精，烧开；4.将糖醋汁放凉后倒入装黄瓜的盘中，浸泡几小时后即可食用。\",\n" +
-                "\"texing\":\"清淡爽口，酸甜稍辣。\",\n" +
-                "\"tishi\":\"必须等糖醋汁凉透后再浸泡黄瓜，这样黄瓜会更脆爽。\",\n" +
-                "\"tiaoliao\":\"食用油30克；香醋1小匙(3克)；精盐3小匙(9克)；白糖1/2小匙(1.5克)；味精1/2小匙(1.5克)\",\n" +
-                "\"yuanliao\":\"黄瓜250克；香菇25克；胡萝卜25克；冬笋25克；大葱1根；生姜1小块\"\n" +
-                "},\n" +
-                "{\n" +
-                "\"id\":4649,\n" +
-                "\"type_id\":429,\n" +
-                "\"type_name\":\"第二道菜\",\n" +
-                "\"cp_name\":\"炝黄瓜衣\",\n" +
-                "\"zuofa\":\"1.用清水将黄瓜洗净，切成2寸长的段，片下黄瓜皮，卷成卷，放入盆中，撒些精盐，腌10分钟，捞出，挤出水，码在盆中。2.用刀将姜刮去皮，洗净，切成细丝，放在黄瓜皮上。3.锅中注入适量清水，加入醋精、白糖，上火熬化后晾凉，倒在黄瓜皮上，再放入桂花酱，用盘子盖上腌十小时。4.将黄瓜皮卷取出，切成小段，断面朝上，码在盘中即可食用。\",\n" +
-                "\"texing\":\"\",\n" +
-                "\"tishi\":\"\",\n" +
-                "\"tiaoliao\":\"精盐1克，醋精20克，白糖50克，桂花酱10克，姜15克。\",\n" +
-                "\"yuanliao\":\"黄瓜750克(约6条)。\"\n" +
-                "},\n" +
-                "{\n" +
-                "\"id\":4630,\n" +
-                "\"type_id\":429,\n" +
-                "\"type_name\":\"第二道菜\",\n" +
-                "\"cp_name\":\"炒黄瓜酱\",\n" +
-                "\"zuofa\":\"1.用清水将黄瓜洗净，顺长切成4条，片去黄瓜子，切成3分见方的丁，放入碗中，加入少许精盐，拌匀，腌3分钟，滗去水。2.用刀将猪肉片成3分厚的大片，剞上十字花刀，切成3分见方的丁。3.坐煸锅，注入熟猪油，烧至六成热，放入肉丁煸炒；待肉丁内的水分炒出来时，锅内响声加大，随即放入葱姜末、黄酱继续煸炒；待黄酱裹匀肉丁并散发出酱香味时，加入料酒、精盐继续煸炒均匀，再加入黄瓜丁，淋上香油翻炒均匀，即可出锅。\",\n" +
-                "\"texing\":\"\",\n" +
-                "\"tishi\":\"\",\n" +
-                "\"tiaoliao\":\"料酒10克，精盐1克，黄酱10克，葱姜末各少许，熟猪油15克，香油5克。\",\n" +
-                "\"yuanliao\":\"主料：瘦猪肉150克。配料：嫩黄瓜1条(约100克)。\"\n" +
-                "}\n" +
-                "]\n" +
-                "}";
+//        caipu="{\n" +
+//                "\"code\":200,\n" +
+//                "\"msg\":\"success\",\n" +
+//                "\"newslist\":[\n" +
+//                "{\n" +
+//                "\"id\":4836,\n" +
+//                "\"type_id\":439,\n" +
+//                "\"type_name\":\"凉菜类\",\n" +
+//                "\"cp_name\":\"蓑衣黄瓜\",\n" +
+//                "\"zuofa\":\"1.将黄瓜洗净，切成蓑衣花刀，用盐腌10分钟，再用清水冲洗后沥干水分装盘；2.将香菇、胡萝卜、冬笋、葱、姜洗净切丝；3.锅内放油，油烧至六成热时放入葱丝、姜丝，炒出香味后再倒入香菇丝、胡萝卜丝、冬笋丝翻炒，加入白糖、醋、精盐、味精，烧开；4.将糖醋汁放凉后倒入装黄瓜的盘中，浸泡几小时后即可食用。\",\n" +
+//                "\"texing\":\"清淡爽口，酸甜稍辣。\",\n" +
+//                "\"tishi\":\"必须等糖醋汁凉透后再浸泡黄瓜，这样黄瓜会更脆爽。\",\n" +
+//                "\"tiaoliao\":\"食用油30克；香醋1小匙(3克)；精盐3小匙(9克)；白糖1/2小匙(1.5克)；味精1/2小匙(1.5克)\",\n" +
+//                "\"yuanliao\":\"黄瓜250克；香菇25克；胡萝卜25克；冬笋25克；大葱1根；生姜1小块\"\n" +
+//                "},\n" +
+//                "{\n" +
+//                "\"id\":4649,\n" +
+//                "\"type_id\":429,\n" +
+//                "\"type_name\":\"第二道菜\",\n" +
+//                "\"cp_name\":\"炝黄瓜衣\",\n" +
+//                "\"zuofa\":\"1.用清水将黄瓜洗净，切成2寸长的段，片下黄瓜皮，卷成卷，放入盆中，撒些精盐，腌10分钟，捞出，挤出水，码在盆中。2.用刀将姜刮去皮，洗净，切成细丝，放在黄瓜皮上。3.锅中注入适量清水，加入醋精、白糖，上火熬化后晾凉，倒在黄瓜皮上，再放入桂花酱，用盘子盖上腌十小时。4.将黄瓜皮卷取出，切成小段，断面朝上，码在盘中即可食用。\",\n" +
+//                "\"texing\":\"\",\n" +
+//                "\"tishi\":\"\",\n" +
+//                "\"tiaoliao\":\"精盐1克，醋精20克，白糖50克，桂花酱10克，姜15克。\",\n" +
+//                "\"yuanliao\":\"黄瓜750克(约6条)。\"\n" +
+//                "},\n" +
+//                "{\n" +
+//                "\"id\":4630,\n" +
+//                "\"type_id\":429,\n" +
+//                "\"type_name\":\"第二道菜\",\n" +
+//                "\"cp_name\":\"炒黄瓜酱\",\n" +
+//                "\"zuofa\":\"1.用清水将黄瓜洗净，顺长切成4条，片去黄瓜子，切成3分见方的丁，放入碗中，加入少许精盐，拌匀，腌3分钟，滗去水。2.用刀将猪肉片成3分厚的大片，剞上十字花刀，切成3分见方的丁。3.坐煸锅，注入熟猪油，烧至六成热，放入肉丁煸炒；待肉丁内的水分炒出来时，锅内响声加大，随即放入葱姜末、黄酱继续煸炒；待黄酱裹匀肉丁并散发出酱香味时，加入料酒、精盐继续煸炒均匀，再加入黄瓜丁，淋上香油翻炒均匀，即可出锅。\",\n" +
+//                "\"texing\":\"\",\n" +
+//                "\"tishi\":\"\",\n" +
+//                "\"tiaoliao\":\"料酒10克，精盐1克，黄酱10克，葱姜末各少许，熟猪油15克，香油5克。\",\n" +
+//                "\"yuanliao\":\"主料：瘦猪肉150克。配料：嫩黄瓜1条(约100克)。\"\n" +
+//                "}\n" +
+//                "]\n" +
+//                "}";
 
 
         //获取view对象
@@ -115,6 +137,9 @@ public class Acticity_show extends AppCompatActivity {
 
         //绑定适配器
         try {
+//            System.out.println("========================");
+//            System.out.println(caipu);
+//            System.out.println("=========================");
             myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),caipu);
         } catch (JSONException e) {
             e.printStackTrace();

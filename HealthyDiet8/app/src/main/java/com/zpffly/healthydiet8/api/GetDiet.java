@@ -11,6 +11,7 @@ import java.net.URL;
 
 public class GetDiet {
 
+
     private static final String httpUrl = "http://api.tianapi.com/txapi/caipu/index";
     private static final String apiKey = "336f364e7b087b466cf130e3defd47d4";
     // 请求的数据默认5条

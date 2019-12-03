@@ -24,9 +24,14 @@ import com.kongzue.dialog.util.BaseDialog;
 import com.kongzue.dialog.v3.InputDialog;
 import com.kongzue.dialog.v3.TipDialog;
 import com.kongzue.dialog.v3.WaitDialog;
+import com.zpffly.healthydiet8.NETConnect.GetDietThread;
 import com.zpffly.healthydiet8.NETConnect.GetImgThread;
 import com.zpffly.healthydiet8.NETConnect.NetThread;
 import com.zpffly.healthydiet8.show.Acticity_show;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Uri photoUri = null;
     private Uri photoOutputUri = Uri.parse("file:////sdcard/image_output.jpg"); // 图片最终的输出文件的 Uri
+    private String res = "";
 
     // 识别连接处理器
     private Handler handler = new Handler(){
@@ -64,27 +70,31 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             // 关闭等待框
             WaitDialog.dismiss();
-            final String res = msg.getData().getString("res");
+            res = msg.getData().getString("res");
             if("error".equals(res)){
                 TipDialog.show(MainActivity.this, "网络出错", TipDialog.TYPE.ERROR);
             }else {
-                // 识别成功，跳转到展示页面
                 // todo
-                CircularAnim.fullActivity(MainActivity.this, inputUrlButton)
-                        .colorOrImageRes(R.color.mycolor)
-                        .go(new CircularAnim.OnAnimationEndListener(){
-                            @Override
-                            public void onAnimationEnd() {
-                                Intent display = new Intent(MainActivity.this, Acticity_show.class);
-                                display.putExtra("title", res);
-                                display.putExtra("url", photoOutputUri.toString());
-                                startActivity(display);
-                            }
-                        });
+                // 跳转
+//                CircularAnim.fullActivity(MainActivity.this, inputUrlButton)
+//                        .colorOrImageRes(R.color.mycolor)
+//                        .go(new CircularAnim.OnAnimationEndListener(){
+//                            @Override
+//                            public void onAnimationEnd() {
+//                                Intent display = new Intent(MainActivity.this, Acticity_show.class);
+//                                display.putExtra("title", res);
+//                                display.putExtra("url", photoOutputUri.toString());
+//                                startActivity(display);
+//                            }
+//                        });
+                doGetDiet(res);
 //                System.out.println(res);
             }
         }
     };
+
+
+
 
     // 获取图片连接处理器
     private Handler getImgHandle = new Handler(){
@@ -98,6 +108,27 @@ public class MainActivity extends AppCompatActivity {
                 byte[] bytearray = msg.getData().getByteArray("arr");
                 doInput(bytearray);
             }
+        }
+    };
+
+
+    // 获取菜谱后的Handle
+    private Handler caipuHandle = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            final String diet = msg.getData().getString("diet");
+            CircularAnim.fullActivity(MainActivity.this, inputUrlButton)
+                        .colorOrImageRes(R.color.mycolor)
+                        .go(new CircularAnim.OnAnimationEndListener(){
+                            @Override
+                            public void onAnimationEnd() {
+                                Intent display = new Intent(MainActivity.this, Acticity_show.class);
+                                display.putExtra("title", res);
+                                display.putExtra("url", photoOutputUri.toString());
+                                display.putExtra("caipu", diet);
+                                startActivity(display);
+                            }
+                        });
         }
     };
 
@@ -346,6 +377,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
             }
+        }
+    }
+
+
+    /**
+     * 处理获取菜谱
+     */
+    private void doGetDiet(String res){
+        try {
+            System.out.println("========doGetDiet===========");
+            System.out.println(res);
+            System.out.println("========doGetDiet===========");
+            // 解析识别json得到菜名
+            JSONObject jsonobj=new JSONObject(res);
+            JSONArray jsonarry=jsonobj.optJSONArray("result");
+
+            String resName = jsonarry.optJSONObject(0).optString("name");
+            GetDietThread thread = new GetDietThread(resName, caipuHandle);
+            thread.start();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

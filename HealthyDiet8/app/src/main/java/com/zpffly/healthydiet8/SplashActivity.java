@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.view.Window;
 
 public class SplashActivity extends AppCompatActivity{
-    private final int SPLASH_DISPLAY_LENGHT = 5000;
+    private final int SPLASH_DISPLAY_LENGHT = 2000;
     private Handler handler;
 
     @Override

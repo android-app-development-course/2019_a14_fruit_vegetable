@@ -3,11 +3,13 @@ package com.zpffly.healthydiet8.show;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,17 +38,22 @@ public class Acticity_show extends AppCompatActivity {
     private Toolbar toolbar;
     private String title;
     private String caipu;
+    private ImageView imageView;
     static int iconflag=0;
+    private Uri photoOutputUri;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
+        imageView=findViewById(R.id.img_main);
+
         Intent thisintent=getIntent();
         title=thisintent.getStringExtra("title");
         caipu=thisintent.getStringExtra("caipu");
+        photoOutputUri=Uri.parse(thisintent.getStringExtra("url"));
 
-
+        imageView.setImageURI(photoOutputUri);
 
         caipu="{\n" +
                 "\"code\":200,\n" +
@@ -98,7 +105,7 @@ public class Acticity_show extends AppCompatActivity {
 
         //设置stausbar和toolbar颜色
         window=getWindow();
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.example_melon);//获取图片
+        Bitmap bmp = BitmapFactory.decodeFile(photoOutputUri.getPath());//获取图片
         paletteBitmap(bmp);//获取图片主色
 
         //设置toolbarlayout的Title

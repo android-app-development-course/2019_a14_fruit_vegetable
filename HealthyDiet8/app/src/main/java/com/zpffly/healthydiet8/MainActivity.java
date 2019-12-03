@@ -26,6 +26,7 @@ import com.kongzue.dialog.v3.TipDialog;
 import com.kongzue.dialog.v3.WaitDialog;
 import com.zpffly.healthydiet8.NETConnect.GetImgThread;
 import com.zpffly.healthydiet8.NETConnect.NetThread;
+import com.zpffly.healthydiet8.show.Acticity_show;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -74,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
                         .go(new CircularAnim.OnAnimationEndListener(){
                             @Override
                             public void onAnimationEnd() {
-                                Intent display = new Intent(MainActivity.this, DisplayActivity.class);
-                                display.putExtra("res", res);
+                                Intent display = new Intent(MainActivity.this, Acticity_show.class);
+                                display.putExtra("title", res);
+                                display.putExtra("url", photoOutputUri.toString());
                                 startActivity(display);
                             }
                         });

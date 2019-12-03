@@ -8,7 +8,7 @@
     android:orientation="vertical"
     >
 
-    <include layout="@layout/title_layout"/>
+<!--    <include layout="@layout/title_layout"/>-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,7 +46,7 @@
                 android:layout_toLeftOf="@id/user_line"
                 android:textSize="17sp"
                 android:textColor="@color/white"
-                android:text="范韬霖"/>
+                android:text="admin"/>
 
             <TextView
                 android:id="@+id/user_val"
@@ -56,7 +56,7 @@
                 android:textSize="17sp"
                 android:textColor="@color/white"
                 android:layout_toRightOf="@id/user_line"
-                android:text="1232388888"/>
+                android:text="18888888888"/>
         </RelativeLayout>
 
     </RelativeLayout>

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private CircleButton startCameraButton = null;
     private FloatingActionButton choiceFromAlbumButton = null;
     private FloatingActionButton inputUrlButton = null;
+    private FloatingActionButton loginButton = null;
 
     private static final int TAKE_PHOTO_PERMISSION_REQUEST_CODE = 0; // 拍照的权限处理返回码
     private static final int WRITE_SDCARD_PERMISSION_REQUEST_CODE = 1; // 读储存卡内容的权限处理返回码
@@ -140,9 +141,13 @@ public class MainActivity extends AppCompatActivity {
         startCameraButton = findViewById(R.id.startCameraButton);
         choiceFromAlbumButton = findViewById(R.id.choiceFromAlbumButton);
         inputUrlButton = findViewById(R.id.inputUrlButton);
+        loginButton = findViewById(R.id.login);
+
         startCameraButton.setOnClickListener(clickListener);
         choiceFromAlbumButton.setOnClickListener(clickListener);
         inputUrlButton.setOnClickListener(clickListener);
+        loginButton.setOnClickListener(clickListener);
+
 
 //         判断是否有读取内存卡权限
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -187,6 +192,16 @@ public class MainActivity extends AppCompatActivity {
                                 WaitDialog.show(MainActivity.this, "正在识别...");
                                 new Thread(new GetImgThread(inputStr, getImgHandle)).start();
                                 return false;
+                            }
+                        });
+            }else if (v == loginButton){
+                CircularAnim.fullActivity(MainActivity.this, loginButton)
+                        .colorOrImageRes(R.color.mycolor)
+                        .go(new CircularAnim.OnAnimationEndListener(){
+                            @Override
+                            public void onAnimationEnd() {
+                                Intent loginIntent = new Intent(MainActivity.this, loginActivity.class);
+                                startActivity(loginIntent);
                             }
                         });
             }

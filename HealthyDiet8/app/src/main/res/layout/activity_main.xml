@@ -54,6 +54,15 @@
             app:fab_icon="@drawable/input"
             fab:fab_title="输入图片URL" />
 
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/cardview_light_background"
+            fab:fab_colorPressed="@color/colorPrimary"
+            app:fab_icon="@drawable/user"
+            fab:fab_title="登录" />
+
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/img_login_back"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/title_layout"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/h_back"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <ImageView
+            android:id="@+id/h_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/user1"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/h_back"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/user_line"
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/user_line"
+                android:textSize="17sp"
+                android:textColor="@color/white"
+                android:text="范韬霖"/>
+
+            <TextView
+                android:id="@+id/user_val"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textSize="17sp"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@id/user_line"
+                android:text="1232388888"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_group_chat"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white_color"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/iv_group_chat"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:scaleType="center"
+            android:src="@drawable/history_diet"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/iv_group_chat"
+            android:gravity="center"
+            android:text="浏览记录"
+            android:textColor="@color/app_black_color"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_change_pass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white_color"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/iv_1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:scaleType="center"
+            android:src="@drawable/like_putinlist"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/iv_1"
+            android:gravity="center"
+            android:text="收藏菜谱"
+            android:textColor="@color/app_black_color"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/notification1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white_color"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/info_notify"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:scaleType="center"
+            android:src="@drawable/notify"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/info_notify"
+            android:gravity="center"
+            android:text="消息通知"
+            android:textColor="@color/app_black_color"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/about_us"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white_color"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/about_us1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:scaleType="center"
+            android:src="@drawable/about_us"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/about_us1"
+            android:gravity="center"
+            android:text="关于我们"
+            android:textColor="@color/app_black_color"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/iv_1"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/app_red_color"
+        android:textSize="16sp"
+        android:background="@color/white_color"/>
+</LinearLayout>

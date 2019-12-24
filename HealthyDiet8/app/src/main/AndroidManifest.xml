@@ -17,6 +17,7 @@
         <activity android:name=".show.Acticity_show"></activity>
         <activity android:name=".loginActivity"></activity>
         <activity android:name=".FragmentMeActivity"></activity>
+        <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".SplashActivity"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
